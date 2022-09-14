@@ -110,6 +110,9 @@ button {
     display: inline-block;
 }
 
+.dashboardBg{
+    background-image: linear-gradient(to left bottom, #2d23da, #2a45e3, #345fe8, #4876eb, #618ceb, #5a9ef2, #5daff6, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+}
 .navbar{
     display: flex;
     justify-content: space-around;
@@ -203,7 +206,7 @@ table{
 
 }
 table td, table th {
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
     padding: 8px;
 }
 

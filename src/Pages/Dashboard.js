@@ -22,7 +22,7 @@ const Dashboard = () => {
         title:obj.title,
         image:<img className="news-image" src={obj.urlToImage} alt={obj.title}/>,
         source:obj.source.name,
-        link: <button className="btn-news" onClick={window.open(obj.url,'_blank')}>view</button>
+        link: <form target="_blank" action={obj.url}><button className="btn-news">view</button></form>
       }
       return new0bj;
      })
@@ -64,38 +64,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-  // // data state to store the TV Maze API data. Its initial value is an empty array
-  // const [data, setData] = useState([]);
-
-  // // Using useEffect to call the API once mounted and set the data
-  // useEffect(() => {
-  //   // instantanous func.
-  //   (async () => {
-  //     try {
-  //       const NEWS_URL =
-  //         "https://newsapi.org/v2/everything?" +
-  //         "q=Apple&" +
-  //         "from=2022-09-14&" +
-  //         "sortBy=popularity&" +
-  //         "apiKey=dae44bae76c94726b2514cf582225e7f";
-  //       const result = await axios(NEWS_URL);
-  //       setData(result.data);
-  //       console.log(JSON.stringify(result));
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   })();
-  // },[]);
-
-  // const columns = [
-  //   {
-  //     Header: "Name",
-  //     accessor: "name",
-  //   },
-  //   {
-  //     Header: "Age",
-  //     accessor: "age",
-  //   },
-  // ];
-
-  
