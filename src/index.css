@@ -14,7 +14,7 @@ html {
 
 body {
     min-height: 100vh;
-    background-color: dodgerblue;
+    background-color: lightgray;
 }
 
 .App {
@@ -23,7 +23,6 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh; 
-  padding: 1rem 0.5rem;
 }
 
 section {
@@ -112,3 +111,67 @@ button {
 .line {
     display: inline-block;
 }
+
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    min-width: 100vw;
+    position: absolute;
+    top: 0;
+    left:0;
+    background-color: black;
+    color: rgb(255, 255, 255);
+    border-bottom: 5px solid cyan;
+    box-shadow: rgb(47, 63, 81) 0px 20px 30px -10px;
+}
+
+.navbar-item{
+    padding: 1vw 2vw;
+    cursor: pointer;
+    font-size: larger;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+.navbar-item:hover{
+background-color: #fff;
+color: rgb(0, 0, 0);
+border-radius: 10px;
+border: 1px solid crimson;
+transition: all 0.5s;
+}
+
+.dropdown {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+  }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: lightgray;
+  min-width: 160px;
+  box-shadow: 5px 8px 10px 0px black;
+ }
+
+.dropdown-content p {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-weight: normal;
+  font-size: medium;
+  text-align: left;
+}
+
+.dropdown-content p:hover {
+background-color: gray;
+color:white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}  
