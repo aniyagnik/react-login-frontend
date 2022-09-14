@@ -6,7 +6,7 @@ const AppBar = () => {
       <div className="navbar-item">Home</div>
       <div className="navbar-item dropdown">          
           <span>Profile</span>
-          <div class="dropdown-content">
+          <div className="dropdown-content">
           <p>Logout</p>
           <p>Delete Account</p>
         </div>

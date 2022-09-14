@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
 import axios from "../api/axios";
+import HeadBox from "../component/HeadBox";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
@@ -90,6 +91,7 @@ const Register = () => {
   };
   return (
     <div>
+      <HeadBox/>
       {success ? (
         <section>
           <h1>Success!</h1>

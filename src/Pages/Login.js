@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthProvider";
 import { Link } from "react-router-dom";
 
 import axios from "../api/axios";
+import HeadBox from "../component/HeadBox";
 const LOGIN_URL = "/auth";
 
 const Login = () => {
@@ -52,6 +53,7 @@ const Login = () => {
 
   return (
     <div>
+      <HeadBox/>
       {success ? (
         <section>
           <h1>You are logged in!</h1>
@@ -83,13 +85,13 @@ const Login = () => {
               required
             />
             <button>Sign In</button>
-            <p>
+          </form>
+          <p>
               Need an Account? <br />
               <span className="line">
               <Link to="/signup">Sign Up</Link>
               </span>
             </p>
-          </form>
         </section>
       )}
     </div>
