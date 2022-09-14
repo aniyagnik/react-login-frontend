@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import { Link } from "react-router-dom";
 
-import axios from "../api/axios";
+import axios from "axios";
 import HeadBox from "../component/HeadBox";
 const LOGIN_URL = "/auth";
 
