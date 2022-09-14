@@ -1,31 +1,32 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "./context/AuthProvider";
+import AuthContext from "../context/AuthProvider";
+import { Link } from "react-router-dom";
 
-import axios from "./api/axios";
+import axios from "../api/axios";
 const LOGIN_URL = "/auth";
 
 const Login = () => {
   const { setAuth } = useContext(AuthContext);
-  const userRef = useRef();
+  const usernameRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    userRef.current.focus();
+    usernameRef.current.focus();
   }, []);
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, password]);
+  }, [username, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(LOGIN_URL, JSON.stringify(user, password), {
+      const res = await axios.post(LOGIN_URL, JSON.stringify(username, password), {
         header: { "Content-Type": "application/json" },
         withCredentials: true,
       });
@@ -34,8 +35,8 @@ const Login = () => {
       console.log(JSON.stringify(res));
       const accessToken = res.data.accessToken;
 
-      setAuth({ user, password, accessToken });
-      setUser("");
+      setAuth({ username, password, accessToken });
+      setUsername("");
       setPassword("");
       setSuccess(true);
     } catch (err) {
@@ -68,9 +69,9 @@ const Login = () => {
             <input
               type="text"
               id="username"
-              value={user}
-              ref={userRef}
-              onChange={(e) => setUser(e.target.value)}
+              value={username}
+              ref={usernameRef}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
             <label htmlFor="password">Password:</label>
@@ -85,7 +86,7 @@ const Login = () => {
             <p>
               Need an Account? <br />
               <span className="line">
-                <a href="#">Sign Up</a>
+              <Link to="/signup">Sign Up</Link>
               </span>
             </p>
           </form>
