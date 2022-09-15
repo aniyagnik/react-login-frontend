@@ -5,7 +5,7 @@ import AppBar from "../Appbar";
 const Layout = () => {
   return (
     <div className="DashboardBg">
-      <AppBar />
+      <AppBar/>
       <Outlet />
     </div>
   );

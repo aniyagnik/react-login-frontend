@@ -1,13 +1,12 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
-import { Link } from "react-router-dom";
-
+import React, { useRef, useState, useEffect } from "react";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
+
 import HeadBox from "../component/HeadBox";
 const LOGIN_URL = "/auth";
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
   const usernameRef = useRef();
   const errRef = useRef();
 
@@ -27,44 +26,42 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(LOGIN_URL, JSON.stringify(username, password), {
-        header: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
-
-      console.log(JSON.stringify(res.data));
-      console.log(JSON.stringify(res));
-      const accessToken = res.data.accessToken;
-
-      setAuth({ username, password, accessToken });
+      const response = await axios.post(
+        LOGIN_URL,
+        { username: username, password: password },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+          crossDomain: true,
+        }
+      );
       setUsername("");
       setPassword("");
       setSuccess(true);
+      Cookies.set('accessKey',response.data.accessToken)
+      console.log("success");
     } catch (err) {
-      if (!err.response) setErrMsg("No server response");
-      else if (err.response.status === 400)
-        setErrMsg("Missing username or password");
-      else if (err.response.status === 401) setErrMsg("unauthorised");
-      else setErrMsg("Login Failed");
- 
+      console.log("err in register: ", err);
+      if (!err.response) setErrMsg("No Server Response");
+      else if (err.response.status === 409) setErrMsg("Username Taken");
+      else setErrMsg("Registration Failed");
       errRef.current.focus();
     }
   };
-
   return (
     <div>
-      <HeadBox/>
+      <HeadBox />
       {success ? (
-        <section>
-          <h1>You are logged in!</h1>
-          <br />
-          <p>
-            <a>Go to Home</a>
-          </p>
-        </section>
+        <Navigate to={"/users"} />
       ) : (
         <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+          <p
+            ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p>
           <h1> Sign In</h1>
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">username:</label>
@@ -87,11 +84,11 @@ const Login = () => {
             <button>Sign In</button>
           </form>
           <p>
-              Need an Account? <br />
-              <span className="line">
+            Need an Account? <br />
+            <span className="line">
               <Link to="/signup">Sign Up</Link>
-              </span>
-            </p>
+            </span>
+          </p>
         </section>
       )}
     </div>

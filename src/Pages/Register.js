@@ -63,7 +63,7 @@ const Register = () => {
     try {
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({ username, password }),
+        { username: username, password: password },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -71,8 +71,6 @@ const Register = () => {
         }
       );
       console.log(response.data);
-      console.log(response.accessToken);
-      console.log(JSON.stringify(response));
       setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this
@@ -80,6 +78,7 @@ const Register = () => {
       setPassword("");
       setMatchPassword("");
     } catch (err) {
+      console.log("err in register: ",err)
       if (!err.response) 
         setErrMsg("No Server Response");
       else if (err.response.status === 409)
@@ -96,7 +95,7 @@ const Register = () => {
         <section>
           <h1>Success!</h1>
           <p>
-            <a href="#">Sign In</a>
+            <Link to="/">Sign In</Link>
           </p>
         </section>
       ) : (
@@ -235,7 +234,6 @@ const Register = () => {
             Already registered?
             <br />
             <span className="line">
-              {/*put router link here*/}
                 <Link to="/">Sign In</Link>
             </span>
           </p>
