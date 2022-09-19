@@ -3,8 +3,10 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 
+import { BASE_URL } from "../constant/constants"
 import HeadBox from "../component/HeadBox";
-const LOGIN_URL = "/auth";
+
+const LOGIN_URL = BASE_URL+"/auth";
 
 const Login = () => {
   const usernameRef = useRef();
@@ -39,12 +41,13 @@ const Login = () => {
       setPassword("");
       setSuccess(true);
       Cookies.set('accessKey',response.data.accessToken)
-      console.log("success");
+      // console.log("success");
     } catch (err) {
-      console.log("err in register: ", err);
+      console.log("err in login: ", err);
       if (!err.response) setErrMsg("No Server Response");
-      else if (err.response.status === 409) setErrMsg("Username Taken");
-      else setErrMsg("Registration Failed");
+      else if (err.response.status === 409) setErrMsg("Error in Logging In");
+      else if (err.response.status === 404) setErrMsg("Username or Password is wrong");
+      else setErrMsg("Login Failed");
       errRef.current.focus();
     }
   };

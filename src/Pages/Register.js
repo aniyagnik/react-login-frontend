@@ -9,12 +9,13 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 import HeadBox from "../component/HeadBox";
+import { BASE_URL } from "../constant/constants"
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-const REGISTER_URL = "/register";
+const REGISTER_URL = BASE_URL+"/register";
 
 const Register = () => {
   const usernameRef = useRef();
@@ -70,7 +71,7 @@ const Register = () => {
           crossDomain:true,
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this

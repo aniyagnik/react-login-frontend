@@ -3,16 +3,18 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import Cookies from "js-cookie";
 
+import { BASE_URL } from "./constant/constants"
+
 const AppBar = () => {
   const navigate = useNavigate();
   const handleLogout=async()=>{
     try{
-      await axios('/logout')
+      await axios.delete(`${BASE_URL}/users/logout`)
       Cookies.remove("accessKey");
       navigate('/');
     }
-    catch{
-      console.log(err);
+    catch(err){
+      console.log("error in logout ",err);
     }
   }
   return (

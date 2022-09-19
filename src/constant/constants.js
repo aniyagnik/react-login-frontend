@@ -1,0 +1,1 @@
+export const BASE_URL = "https://internship2022-test.herokuapp.com"

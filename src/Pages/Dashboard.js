@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Table from "../component/Table";
 import LoadingScreen from "../component/LoadingScreen";
+import { BASE_URL } from "../constant/constants"
 
 const Dashboard = () => {
   // data state to store the TV Maze API data. Its initial value is an empty array
@@ -10,15 +11,12 @@ const Dashboard = () => {
   // Using useEffect to call the API once mounted and set the data
   useEffect(() => {
     (async () => {
-      const NEWS_URL =
-        "https://newsapi.org/v2/everything?" +
-        "q=Apple&" +
-        "from=2022-09-14&" +
-        "sortBy=popularity&" +
-        "apiKey=dae44bae76c94726b2514cf582225e7f";
+      // const proxyUrl = "https://cors-anywhere.herokuapp.com/"
+      const NEWS_URL =BASE_URL+"/users/apiNews"
       try {
-        const result = await axios(NEWS_URL);
-        const requiredData = result.data.articles.map((obj) => {
+        const result = await axios.get(NEWS_URL);
+        // console.log(result.data);
+        const requiredData = result.data.map((obj) => {
           const new0bj = {
             title: obj.title,
             image: (
